@@ -22,7 +22,7 @@ class BooksApp extends Component {
           <Search/>
         )}/>
         <Route exact path='/' render= { () => (
-          <MyReads/>
+          <MyReads books= {this.state.books}/>
         )}/>
       </div>
     )
