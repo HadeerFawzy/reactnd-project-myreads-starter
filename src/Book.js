@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 
 class Book extends Component {
-  /*static propTypes = {
-    books: PropTypes.array,
-    onShelfChange: PropTypes.func
-  }*/
 
   change = (event) => {
-    this.props.onShelfChange (this.props.book, event.target.value)
+    this.props.onShelfChange(this.props.book, event.target.value)
   }
 
   render() {
@@ -17,8 +13,13 @@ class Book extends Component {
       <li key={book.id}>
         <div className="book">
           <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 193, background: `url(${book.imageLinks.thumbnail})`}}>
-            </div>
+            {
+              !book.imageLinks && <div className="book-cover" style={{ width: 128, height: 193,}}></div>
+            }
+            {
+              book.imageLinks && <div className="book-cover" style={{ width: 128, height: 193, background: `url(${book.imageLinks.thumbnail})`}}></div>
+            }
+            
             <div className="book-shelf-changer">
               <select onChange={this.change.bind(this)} >
                 <option value="none" disabled>Move to...</option>
