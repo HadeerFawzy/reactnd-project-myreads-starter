@@ -1,3 +1,6 @@
+## What The App Does
+it allows you to search book among some books saved in the server and allows you to add any book to your list, and also change the book state whether you currently reading it or the read it already or you want to read it.
+
 # MyReads Project
 
 This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
