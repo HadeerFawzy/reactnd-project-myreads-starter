@@ -4,7 +4,7 @@ import Book from './Book.js'
 
 class MyReads extends Component {
   render() {
-    const { books } = this.props
+    const { books, onShelfChange } = this.props
 
     return (
       <div className="list-books">
@@ -19,7 +19,7 @@ class MyReads extends Component {
                 <ol className="books-grid">
                   { books.map((book) => ( 
                     book.shelf === 'currentlyReading' && (
-                      <Book book={book} key={book.id}/>
+                      <Book book={book} key={book.id} onShelfChange={onShelfChange}/>
                     )
                   ))}
                 </ol>
@@ -31,7 +31,7 @@ class MyReads extends Component {
                 <ol className="books-grid">
                   { books.map((book) => ( 
                     book.shelf === 'wantToRead' && (
-                      <Book book={book} key={book.id}/>
+                      <Book book={book} key={book.id} onShelfChange={onShelfChange}/>
                     )
                   ))}
                 </ol>
@@ -43,7 +43,7 @@ class MyReads extends Component {
                 <ol className="books-grid">
                   { books.map((book) => ( 
                     book.shelf === 'read' && (
-                      <Book book={book} key={book.id}/>
+                      <Book book={book} key={book.id} onShelfChange={onShelfChange}/>
                     )
                   ))}
                 </ol>

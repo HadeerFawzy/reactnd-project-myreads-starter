@@ -6,6 +6,7 @@ import MyReads from './MyReads.js'
 import './App.css'
 
 class BooksApp extends Component {
+
   state = {
     books: []
   }
@@ -15,7 +16,27 @@ class BooksApp extends Component {
     })
   }
   updateBookShelf = (book, shelf) => {
-    console.log(book, shelf)
+    // console.log(book, shelf)
+    BooksAPI.update(book, shelf).then((response) => {
+      this.state.books.map((oldBook) => {
+        if(oldBook.id === book.id){
+          console.log('book exists')
+          this.componentDidMount ()
+        }else{
+          console.log('book doesnt exist')
+          this.state.books.push(book)
+          this.componentDidMount ()
+        }
+      })
+
+      // console.log(response)
+      // this.state.books.push(book)
+      // console.log(this.state.books)
+      // this.setState({books: this.state.books})
+      // this.componentDidMount ()
+      // console.log(book, this.state.books)
+
+    })
   }
   render() {
     return (
