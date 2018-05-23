@@ -4,6 +4,7 @@ import Book from './Book.js'
 
 class MyReads extends Component {
   render() {
+    /*books array to map over, onShelfChange function hold it here only to pass it to the book component*/
     const { books, onShelfChange } = this.props
 
     return (

@@ -4,12 +4,15 @@ import * as BooksAPI from './BooksAPI'
 import Book from './Book.js'
 
 class Search extends Component {
+  /*query to hold the input search value in it, array to hold the books coming from search in it*/
   state = {
     query: '',
     booksFromSearch: []
   }
   updateQuery = (query) => {
+    /*keep track if the input value changed to change it at the state*/
     this.setState({query: query })
+    /*invoke the searchBooks function with the query value*/
     this.searchBooks(this.state.query)
   }
   searchBooks = (query) => {
@@ -19,10 +22,12 @@ class Search extends Component {
           this.setState({booksFromSearch: response});
           console.log(response)
         }
+        /*if the search come back with empty array*/
         if(response && response.error === "empty query"){
           this.setState({booksFromSearch: []});
         }
       },
+      /*if there is error with the search*/
       error => {
         this.setState({booksFromSearch: []});
       }
@@ -31,7 +36,7 @@ class Search extends Component {
 
 
   render() {
-
+    /*onShelfChange function hold it here only to pass it to the book component*/
     const { onShelfChange } = this.props
     const { query } = this.state
     
@@ -61,6 +66,7 @@ class Search extends Component {
             )))
           }
           {
+            /*condition if the search comeback empty, tell the user*/
             this.state.booksFromSearch.length === 0 &&(
               <div>No Results</div>
             )

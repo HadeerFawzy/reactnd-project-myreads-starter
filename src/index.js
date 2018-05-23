@@ -11,3 +11,4 @@ ReactDOM.render(
   , document.getElementById('root')
 )
 
+/*at this page only added the Router component*/

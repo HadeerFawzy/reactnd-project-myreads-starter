@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 
 class Book extends Component {
 
+  /* this value to make the default value for any book is NONE 
+   * "it cause problem with the Currently reading option if NONE isn't selected at first"
+   */
   state = {
     value: 'none'
-  }
-
-  change = (event) => {
-    this.props.onShelfChange(this.props.book, event.target.value)
   }
 
   render() {
@@ -18,6 +17,9 @@ class Book extends Component {
         <div className="book">
           <div className="book-top">
             {
+              /* condition to see if the book has thumbnail, 
+               * because if it hasn't it cause a problem calling book.imageLinks.thumbnail
+               */
               !book.imageLinks && <div className="book-cover" style={{ width: 128, height: 193,}}></div>
             }
             {
@@ -25,7 +27,10 @@ class Book extends Component {
             }
             
             <div className="book-shelf-changer">
-              <select value={this.state.value} onChange={(event) => (this.props.onShelfChange(this.props.book, event.target.value))} >
+              <select value={this.state.value} onChange={
+                  /*sending the book changed and the new value to the App.js to update the book at the server*/
+                  (event) => (this.props.onShelfChange(this.props.book, event.target.value))
+                }>
                 <option value="none">Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
