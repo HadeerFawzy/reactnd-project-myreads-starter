@@ -13,14 +13,19 @@ class Search extends Component {
     /*keep track if the input value changed to change it at the state*/
     this.setState({query: query })
     /*invoke the searchBooks function with the query value*/
-    this.searchBooks(this.state.query)
+    query ? this.searchBooks(this.state.query) : this.setState({booksFromSearch: []})
   }
   searchBooks = (query) => {
     BooksAPI.search(query, 20).then( 
       response => {
         if(response) {
+          response.map ( (newbook) => (
+            this.props.books.map ( (existbook) => (
+              existbook.id === newbook.id && (newbook.shelf = existbook.shelf)
+            ))
+          ))
           this.setState({booksFromSearch: response});
-          console.log(response)
+          // console.log(response)
         }
         /*if the search come back with empty array*/
         if(response && response.error === "empty query"){
@@ -55,7 +60,6 @@ class Search extends Component {
                   value={query}
                   onChange ={(event) => this.updateQuery(event.target.value)}
             />
-
           </div>
         </div>
         <div className="search-books-results">

@@ -15,7 +15,7 @@ class BooksApp extends Component {
   /*run right after the component is added to the DOM*/
   componentDidMount (){
     BooksAPI.getAll().then((books) => {
-      this.setState({books: books})
+      this.setState({books})
     })
   }
 
@@ -23,19 +23,13 @@ class BooksApp extends Component {
   updateBookShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then((response) => {
       /*loop over the books array to see if the changed book exists already or we need to add it from the Search list to MyReads list */
-      this.state.books.map((oldBook) => {
-        if(oldBook.id === book.id){
-          /*if exists, only change it's state and render MyReads again with the new updates*/
-          // console.log('book exists')
-          this.componentDidMount ()
-        }else{
-          /*if not, push it to the books array, then render MyReads again with the new updates */
-          // console.log('book doesnt exist')
-          this.state.books.push(book)
-          this.componentDidMount ()
-        }
-      })
+      /*if not exists, concate it to the books array */
+      this.setState(state => ({
+        books: state.books.filter(b => b.id !== book.id).concat(book)
+      }))
     })
+    /*then render MyReads again with the new updates*/
+    this.componentDidMount ()
   }
 
   render() {
